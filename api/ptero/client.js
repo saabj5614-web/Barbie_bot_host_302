@@ -30,3 +30,4 @@ const get = p => ptero(p);
 const post = (p, b) => ptero(p, { method: "POST", body: JSON.stringify(b) });
 const del = p => ptero(p, { method: "DELETE" });
 module.exports = { get, post, del };
+    
