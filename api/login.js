@@ -1,0 +1,2 @@
+const {makeSession}=require('../lib/auth');
+module.exports=(req,res)=>{if(req.method!=='POST')return res.status(405).json({ok:false});const {password}=req.body||{};if(!process.env.OWNER_PASSWORD||password!==process.env.OWNER_PASSWORD)return res.status(401).json({ok:false,error:'Invalid password'});res.setHeader('Set-Cookie',`barbie_owner=${makeSession()}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=86400`);res.json({ok:true})};
