@@ -3,3 +3,4 @@
   "functions":{"api/*.js":{"maxDuration":30},"api/**/*.js":{"maxDuration":30}},
   "rewrites":[{"source":"/dashboard","destination":"/index.html"},{"source":"/login","destination":"/index.html"}]
 }
+
