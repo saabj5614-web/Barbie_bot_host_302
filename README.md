@@ -21,3 +21,4 @@ Fresh Vercel control panel for an authorized Pterodactyl installation.
 This project does not include or request leaked credentials. Put your own Pterodactyl Application API key in Vercel Environment Variables.
 
 For production customer accounts, add a real database/session store before selling access at scale. The V1 owner gate is deliberately simple and should not be treated as a complete billing/identity system.
+
