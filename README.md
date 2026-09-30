@@ -1,35 +1,40 @@
 # 𝐁𝐀𝐑𝐁𝐈𝐄 Hosting Panel
 
-Personal owner-only hosting control panel with **4 fixed server slots**.
+Owner-only personal hosting dashboard with **4 fixed Oracle Cloud server slots**.
 
-## Current panel design
+## Final direction
 
-- Exactly 4 server slots; no reseller/customer provisioning flow.
-- No per-slot hard CPU percentage in the panel design. The compute backend can share available CPU between workloads.
-- No 50 GB hard disk reservation in the panel UI; actual capacity is supplied by the backend.
-- Separate management view for every configured slot.
-- Start / Stop / Restart / Kill.
-- Resource monitoring.
-- File listing and file reading.
-- Owner authentication with an HTTP-only signed session cookie.
-- GitHub public/private repository inspection and deployment flow.
-- Secrets stay server-side.
+- Exactly 4 fixed server slots.
+- Oracle Cloud Compute is the backend control layer.
+- CPU is not hard-fixed per server; OCI shape capacity is reported by the backend.
+- No 50 GB hard reservation is enforced by the panel.
+- Each server has its own management view and Oracle console-connection action.
+- Start / Stop / Restart controls use OCI Compute lifecycle actions.
+- GitHub public/private repository inspection is available; private access stays server-side.
+- Long-running workloads run on Oracle Compute, not Vercel.
 
-## Fixed slot mapping
+## Oracle environment variables
 
-Set these environment variables when a backend is connected:
+Configure these in Vercel Project Settings > Environment Variables:
 
-`SLOT_1_SERVER_ID`
-`SLOT_2_SERVER_ID`
-`SLOT_3_SERVER_ID`
-`SLOT_4_SERVER_ID`
+- `OCI_TENANCY_OCID`
+- `OCI_USER_OCID`
+- `OCI_FINGERPRINT`
+- `OCI_REGION`
+- `OCI_PRIVATE_KEY`
+- `OCI_PASSPHRASE` (optional)
+- `OCI_SLOT_1_INSTANCE_OCID` through `OCI_SLOT_4_INSTANCE_OCID`
+- `OCI_SLOT_1_NAME` through `OCI_SLOT_4_NAME`
+- `GITHUB_TOKEN` for private repository inspection
 
-## Next integration stage
+Do not commit OCI private keys or other secrets to GitHub.
 
-The current repository contains the fixed-slot control layer. The next stage replaces the temporary Pterodactyl transport with Oracle Cloud Compute, then adds Oracle-backed console, file operations, uploads/downloads, archives, backups and provisioning.
+## Console note
 
-**Important:** Vercel is the control/API layer; long-running bot processes should run on the compute backend, not inside a Vercel request.
+OCI instance console connections are SSH-based. The panel creates an OCI console-connection resource per selected server; a browser terminal/interactive file manager requires a separate server-side agent layer.
+
+Oracle's Compute API supports START, STOP and reset-style instance actions, and Oracle documents instance console connections as SSH-based. citeturn0search0turn0search1turn0search14
 
 ## Deployment
 
-Deploy this repository to Vercel and configure the owner authentication variables plus the backend variables required by the current stage.
+Deploy this repository to Vercel as the control/API layer. Add the Oracle variables only after the four OCI instances and credentials are ready.
