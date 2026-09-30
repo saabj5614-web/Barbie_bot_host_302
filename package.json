@@ -1,7 +1,8 @@
 {
   "name":"barbie-hosting-panel",
-  "version":"2.0.0",
+  "version":"3.0.0",
   "private":true,
   "type":"commonjs",
-  "scripts":{"dev":"vercel dev"}
+  "scripts":{"dev":"vercel dev"},
+  "dependencies":{"oci-common":"^2.142.0","oci-core":"^2.142.0"}
 }
