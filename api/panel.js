@@ -77,7 +77,7 @@ module.exports=async(req,res)=>{
     }
 
     const identifier=a.identifier;
-    if(action==='power'){
+    if(action==='console'){\n      const d=await clientGet(`/api/client/servers/${identifier}/websocket`);\n      const a=d?.data?.attributes||d?.attributes||d;\n      return res.json({ok:true,console:{socket:a.socket||a.websocket||null,token:a.token||null}});\n    }\n\n    if(action==='power'){
       if(req.method!=='POST') return res.status(405).json({ok:false,error:'POST required'});
       const signal=String(req.body?.signal||'').toLowerCase();
       if(!['start','stop','restart','kill'].includes(signal)) return res.status(400).json({ok:false,error:'Invalid power signal'});
