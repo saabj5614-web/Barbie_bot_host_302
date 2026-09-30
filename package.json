@@ -1,8 +1,14 @@
 {
-  "name":"barbie-hosting-panel",
-  "version":"3.0.0",
-  "private":true,
-  "type":"commonjs",
-  "scripts":{"dev":"vercel dev"},
-  "dependencies":{"oci-common":"^2.142.0","oci-core":"^2.142.0"}
+  "name": "barbie-hosting-panel",
+  "version": "3.0.1",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo Build complete - static frontend and Vercel API functions"
+  },
+  "dependencies": {
+    "oci-common": "^2.142.0",
+    "oci-core": "^2.142.0"
+  }
 }
